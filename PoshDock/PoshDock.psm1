@@ -1,10 +1,8 @@
-#Requires -Version 3.0
 #Get public and private function definition files.
 $Public  = @( Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue )
 $Private = @( Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue )
 
-$moduleVersion = (Test-ModuleManifest -Path $PSScriptRoot\PoshDock.psd1).Version
-
+#Dot source the files
 Foreach($import in @($Public + $Private))
 {
     Try
@@ -17,5 +15,4 @@ Foreach($import in @($Public + $Private))
     }
 }
 
-# Export all public functions
-Export-ModuleMember -Function $Public.Basename
+Export-ModuleMember -Function $Public.BaseName
