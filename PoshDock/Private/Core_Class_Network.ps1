@@ -1,2 +1,2 @@
-class network {
+class DockerNetwork {
 }

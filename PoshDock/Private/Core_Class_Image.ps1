@@ -1,2 +1,2 @@
-class image {
+class DockerImage {
 }

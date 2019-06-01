@@ -1,2 +1,2 @@
-class volume {
+class DockerVolume {
 }
