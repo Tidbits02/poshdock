@@ -16,11 +16,15 @@ class DockerContainer {
     }
 
     [void] Stop() {
-        write-host "Method not yet implemented"
+        $uri = "http://127.0.0.1:2376/containers/{0}/stop" -f $this.Id
+        Invoke-RestMethod -Uri $uri -Method Post
+        $this.Update() # Updated container info in object
     }
     
     [void] Start() {
-        write-host "Method not yet implemented"
+        $uri = "http://127.0.0.1:2376/containers/{0}/start" -f $this.Id
+        Invoke-RestMethod -Uri $uri -Method Post
+        $this.Update() # Updated container info in object
     }
     
     [void] Pause() {
@@ -29,5 +33,11 @@ class DockerContainer {
     
     [void] Remove() {
         write-host "Method not yet implemented"
+    }
+
+    [void] Update() {
+        $uri = "http://127.0.0.1:2376/containers/{0}/json" -f $this.Id
+        $UpdatedJson = Invoke-RestMethod -Uri $uri -Method Post
+        $this.State = $UpdatedJson.State.Status
     }
 }
